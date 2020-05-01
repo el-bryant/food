@@ -1,0 +1,56 @@
+create table cliente(
+dni_cliente char(8) primary key not null,
+apellidos varchar(30),
+nombres varchar(30),
+telefono char(9),
+correo varchar(40),
+tipo_cliente char(1)
+);
+
+create table repartidor(
+dni_repartidor char(8) primary key not null,
+apellidos varchar(30),
+nombres varchar(30),
+telefono char(9),
+placa varchar(10)
+);
+
+create table proveedor(
+id_proveedor bigint primary key not null auto_increment,
+nombre varchar(50),
+direccion varchar(100),
+latitud varchar(15),
+longitud varchar(15)
+);
+
+create table producto(
+id_producto bigint primary key not null auto_increment,
+nombre varchar(50),
+precio decimal(10,2),
+id_proveedor bigint,
+constraint foreign key (id_proveedor) references proveedor(id_proveedor)
+);
+
+create table pedido(
+id_pedido bigint primary key not null auto_increment,
+fecha date,
+hora char(5),
+dni_cliente char(8),
+dni_repartidor char(8),
+estado char(1),
+direccion varchar(100),
+latitud varchar(15),
+longitud varchar(15),
+total decimal (10,2),
+constraint foreign key (dni_cliente) references cliente(dni_cliente),
+constraint foreign key (dni_repartidor) references repartidor(dni_repartidor)
+);
+
+create table detalle_pedido(
+id_detalle_pedido bigint primary key not null auto_increment,
+id_pedido bigint,
+id_producto bigint,
+cantidad int,
+constraint foreign key (id_pedido) references pedido(id_pedido),
+constraint foreign key (id_producto) references producto(id_producto)
+);
