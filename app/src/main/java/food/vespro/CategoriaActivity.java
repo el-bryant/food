@@ -32,8 +32,6 @@ import food.vespro.entity.Categoria;
 public class CategoriaActivity extends AppCompatActivity {
     private ArrayList<Categoria> categorias;
     private RecyclerView rvCategoria;
-    private Categoria categoria;
-    private RequestQueue requestQueue;
     private CategoriaAdapter categoriaAdapter;
 
     @Override
