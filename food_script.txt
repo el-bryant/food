@@ -15,12 +15,25 @@ telefono char(9),
 placa varchar(10)
 );
 
+create table categoria(
+id_categoria bigint primary key not null auto_increment,
+nombre varchar(30),
+imagen varchar(100)
+);
+
 create table proveedor(
 id_proveedor bigint primary key not null auto_increment,
 nombre varchar(50),
 direccion varchar(100),
 latitud varchar(15),
-longitud varchar(15)
+longitud varchar(15),
+imagen varchar(100)
+);
+
+create table proveedor_categoria(
+id_proveedor_categoria bigint primary key not null auto_increment,
+id_proveedor bigint,
+constraint foreign key (id_proveedor) references proveedor(id_proveedor)
 );
 
 create table producto(
@@ -28,7 +41,24 @@ id_producto bigint primary key not null auto_increment,
 nombre varchar(50),
 precio decimal(10,2),
 id_proveedor bigint,
-constraint foreign key (id_proveedor) references proveedor(id_proveedor)
+imagen varchar(100),
+id_categoria bigint,
+estado char(1),
+constraint foreign key (id_proveedor) references proveedor(id_proveedor),
+constraint foreign key (id_categoria) references categoria(id_categoria)
+);
+
+create table producto_historial(
+id_producto_historial bigint primary key not null auto_increment,
+nombre varchar(50),
+precio decimal(10,2),
+id_proveedor bigint,
+imagen varchar(100),
+id_categoria bigint,
+estado char(1),
+fecha date,
+id_producto bigint,
+constraint foreign key (id_producto) references producto(id_producto)
 );
 
 create table pedido(
