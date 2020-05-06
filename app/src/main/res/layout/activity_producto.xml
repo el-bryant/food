@@ -8,6 +8,12 @@
     tools:context=".ProductoActivity"
     android:padding="10dp" >
 
+    <TextView
+        android:id="@+id/tvMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProducto"
         android:layout_width="match_parent"

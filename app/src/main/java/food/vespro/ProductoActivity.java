@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -25,17 +30,32 @@ public class ProductoActivity extends AppCompatActivity {
     private RecyclerView rvProducto;
     private ArrayList<Producto> productos;
     private ProductoAdapter productoAdapter;
+    public static TextView tvMensaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_producto);
         rvProducto = (RecyclerView) findViewById(R.id.rvProducto);
+        tvMensaje = (TextView) findViewById(R.id.tvMensaje);
         rvProducto.setHasFixedSize(true);
         rvProducto.setLayoutManager(new LinearLayoutManager(this));
         id_categoria = getIntent().getStringExtra("id_categoria");
         Log.i("id_categoria", id_categoria);
         cargarProductos();
+        tvMensaje.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Toast.makeText(ProductoActivity.this, "Producto agregado al carrito", Toast.LENGTH_SHORT).show();
+                tvMensaje.setText("");
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     public void cargarProductos() {

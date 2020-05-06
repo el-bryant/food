@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="food.vespro">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".publico.AppController"
         android:allowBackup="true"
@@ -11,17 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProductoActivity"></activity>
-        <activity android:name=".PedidoActivity"></activity>
-        <activity android:name=".CategoriaActivity">
+        <activity android:name=".AccesoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RegistroActivity" />
+        <activity android:name=".ProductoActivity" />
+        <activity android:name=".PedidoActivity" />
+        <activity android:name=".CategoriaActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
