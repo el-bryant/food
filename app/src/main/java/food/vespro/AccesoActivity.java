@@ -30,11 +30,11 @@ public class AccesoActivity extends AppCompatActivity {
         btnAcceder = (Button) findViewById(R.id.btnAcceder);
         actvDni = (AutoCompleteTextView) findViewById(R.id.actvDni);
         prefUtil = new PrefUtil(this);
-        if (prefUtil.getStringValue("dni_cliente") != null) {
+        if (prefUtil.getStringValue("dni_cliente").equals("")) {
             Log.i("dni_cliente", prefUtil.getStringValue("dni_cliente"));
             Intent intent = new Intent(AccesoActivity.this, CategoriaActivity.class);
-//            startActivity(intent);
-//            finish();
+            startActivity(intent);
+            finish();
         }
         tvRegistro.setOnClickListener(new View.OnClickListener() {
             @Override

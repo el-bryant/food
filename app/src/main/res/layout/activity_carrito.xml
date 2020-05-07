@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductoActivity"
+    tools:context=".CarritoActivity"
     android:padding="10dp" >
 
     <TextView
@@ -16,7 +16,7 @@
         android:text="0" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProducto"
+        android:id="@+id/rvCarrito"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -3,14 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
-    android:id="@+id/cvCategoria" >
+    android:id="@+id/cvCategoria"
+    app:cardCornerRadius="8dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center" >
+        android:gravity="center"
+        android:layout_margin="5dp" >
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/nivIconoCategoria"

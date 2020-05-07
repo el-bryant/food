@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cvCarrito"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/nivImagenProducto"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tvNombreProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del producto"
+                android:textSize="20sp"
+                android:singleLine="true"
+                android:layout_marginEnd="15dp" />
+
+            <TextView
+                android:id="@+id/tvIdProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del producto"
+                android:textSize="25sp"
+                android:layout_marginHorizontal="15dp"
+                android:singleLine="true"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="12" >
+
+                <TextView
+                    android:id="@+id/tvPrecioProducto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="S/ 25.00"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textAlignment="textEnd"
+                    android:layout_marginRight="6dp"/>
+
+                <TextView
+                    android:id="@+id/tvProveedorProducto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:text="Nombre de la tienda Nombre de la tienda"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:lineHeight="15sp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="15dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivEliminar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_eliminar"
+            android:tint="#ffffff"
+            android:background="@drawable/boton_circular_rojo"
+            android:padding="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

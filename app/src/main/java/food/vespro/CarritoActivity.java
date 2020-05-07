@@ -11,54 +11,57 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import java.util.ArrayList;
-import food.vespro.adapter.ProductoAdapter;
-import food.vespro.entity.Producto;
+import food.vespro.adapter.CarritoAdapter;
+import food.vespro.entity.Carrito;
 import food.vespro.publico.Funciones;
+import food.vespro.publico.PrefUtil;
 
 /**
  * By: El Bryant
  */
 
-public class ProductoActivity extends AppCompatActivity {
-    public static String id_categoria;
-    private RecyclerView rvProducto;
-    private ArrayList<Producto> productos;
-    private ProductoAdapter productoAdapter;
+public class CarritoActivity extends AppCompatActivity {
+    public static RecyclerView rvCarrito;
+    PrefUtil prefUtil;
+    ArrayList<Carrito> carrito;
+    public static CarritoAdapter carritoAdapter;
     public static TextView tvMensaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_producto);
-        rvProducto = (RecyclerView) findViewById(R.id.rvProducto);
+        setContentView(R.layout.activity_carrito);
+        rvCarrito = (RecyclerView) findViewById(R.id.rvCarrito);
         tvMensaje = (TextView) findViewById(R.id.tvMensaje);
-        rvProducto.setHasFixedSize(true);
-        rvProducto.setLayoutManager(new LinearLayoutManager(this));
-        id_categoria = getIntent().getStringExtra("id_categoria");
-        cargarProductos();
+        prefUtil = new PrefUtil(this);
+        rvCarrito.setHasFixedSize(true);
+        rvCarrito.setLayoutManager(new LinearLayoutManager(this));
         tvMensaje.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Toast.makeText(ProductoActivity.this, "Producto agregado al carrito", Toast.LENGTH_LONG).show();
             }
             @Override
             public void afterTextChanged(Editable s) {
+                cargarCarrito();
+                Toast.makeText(CarritoActivity.this, "Producto eliminado del carrito satisfactoriamente.",
+                        Toast.LENGTH_LONG).show();
             }
         });
+        cargarCarrito();
     }
 
-    public void cargarProductos() {
-        Log.i("cargarProductos", "ProductoActivity");
-        productos = new ArrayList<>();
+    public void cargarCarrito() {
+        Log.i("cargarCarrito", "CarritoActivity");
+        carrito = new ArrayList<>();
         Thread tr = new Thread() {
             @Override
             public void run() {
-                final String result = Funciones.primero("https://vespro.io/food/wsApp/obtener_productos.php?id_categoria="
-                        + id_categoria);
-                Log.i("cargarProductos", result);
+                final String result = Funciones.primero("https://vespro.io/food/wsApp/obtener_carrito.php?dni_cliente="
+                        + prefUtil.getStringValue("dni_cliente"));
+                Log.i("cargarCarrito", result);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -67,7 +70,8 @@ public class ProductoActivity extends AppCompatActivity {
                             try {
                                 JSONArray jsonArray = new JSONArray(result);
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    productos.add(new Producto(jsonArray.getJSONObject(i).getString("id_producto"),
+                                    carrito.add(new Carrito(jsonArray.getJSONObject(i).getString("id_detalle_pedido"),
+                                            jsonArray.getJSONObject(i).getString("id_producto"),
                                             jsonArray.getJSONObject(i).getString("nombre"),
                                             jsonArray.getJSONObject(i).getDouble("precio"),
                                             jsonArray.getJSONObject(i).getString("proveedor"),
@@ -77,8 +81,8 @@ public class ProductoActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        productoAdapter = new ProductoAdapter(ProductoActivity.this, productos);
-                        rvProducto.setAdapter(productoAdapter);
+                        carritoAdapter = new CarritoAdapter(CarritoActivity.this, carrito);
+                        rvCarrito.setAdapter(carritoAdapter);
                     }
                 });
             }

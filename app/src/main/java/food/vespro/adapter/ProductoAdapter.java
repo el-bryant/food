@@ -1,25 +1,18 @@
 package food.vespro.adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-
 import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import food.vespro.ProductoActivity;
 import food.vespro.R;
 import food.vespro.entity.Producto;
@@ -33,6 +26,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
     private ImageLoader imgLoader = AppController.getInstance().getImageLoader();
     private PrefUtil prefUtil;
     private static String carrito, id_pedido;
+    public static int contador;
 
     public ProductoAdapter(Context context, ArrayList<Producto> productos) {
         mContext = context;
@@ -132,6 +126,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                         JSONArray jsonArray = new JSONArray(result);
                         if (jsonArray.length() > 0) {
                             id_pedido = jsonArray.getJSONObject(0).getString("id_pedido");
+                            prefUtil.saveGenericValue("id_pedido", id_pedido);
                             agregarProducto(id_producto, id_pedido);
                         }
                     } catch (Exception e) {
@@ -145,19 +140,20 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
 
     public void agregarProducto(final String id_producto, final String id_pedido) {
         Log.i("agregarProducto", "ProductoAdapter");
-        final int[] r = {0};
         Thread tr = new Thread() {
             @Override
             public void run() {
                 final String result = Funciones.primero("https://vespro.io/food/wsApp/agregar_producto.php?id_producto="
                         + id_producto + "&id_pedido=" + id_pedido);
                 Log.i("iniciarPedido", result);
-                r[0] = Funciones.segundo(result);
+                int r = Funciones.segundo(result);
+                if (r > 0) {
+                    contador = Integer.parseInt(ProductoActivity.tvMensaje.getText().toString()) + 1;
+                }
             }
         };
         tr.start();
-        if (r[0] > 0) {
-            ProductoActivity.tvMensaje.setText("id_producto");
-        }
+        ProductoActivity.tvMensaje.setText(String.valueOf(contador));
+        Log.i("agregarProducto", "Agregado satisfactoriamente");
     }
 }
