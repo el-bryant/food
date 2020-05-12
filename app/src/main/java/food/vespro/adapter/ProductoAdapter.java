@@ -69,6 +69,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                 } else {
                     obtener_id_pedido(id_producto);
                 }
+                ProductoActivity.tvMensaje.setText(String.valueOf(contador));
+                Log.i("agregarProducto", "Agregado satisfactoriamente");
             }
         });
     }
@@ -145,7 +147,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             public void run() {
                 final String result = Funciones.primero("https://vespro.io/food/wsApp/agregar_producto.php?id_producto="
                         + id_producto + "&id_pedido=" + id_pedido);
-                Log.i("iniciarPedido", result);
+                Log.i("agregarProducto", result);
                 int r = Funciones.segundo(result);
                 if (r > 0) {
                     contador = Integer.parseInt(ProductoActivity.tvMensaje.getText().toString()) + 1;
@@ -153,7 +155,5 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
             }
         };
         tr.start();
-        ProductoActivity.tvMensaje.setText(String.valueOf(contador));
-        Log.i("agregarProducto", "Agregado satisfactoriamente");
     }
 }

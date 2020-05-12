@@ -3,10 +3,14 @@ package food.vespro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
@@ -26,6 +30,8 @@ public class CarritoActivity extends AppCompatActivity {
     ArrayList<Carrito> carrito;
     public static CarritoAdapter carritoAdapter;
     public static TextView tvMensaje;
+    public Button btnRealizarPedido;
+    public static Double total = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class CarritoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_carrito);
         rvCarrito = (RecyclerView) findViewById(R.id.rvCarrito);
         tvMensaje = (TextView) findViewById(R.id.tvMensaje);
+        btnRealizarPedido = (Button) findViewById(R.id.btnRealizarPedido);
         prefUtil = new PrefUtil(this);
         rvCarrito.setHasFixedSize(true);
         rvCarrito.setLayoutManager(new LinearLayoutManager(this));
@@ -51,6 +58,16 @@ public class CarritoActivity extends AppCompatActivity {
             }
         });
         cargarCarrito();
+        btnRealizarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CarritoActivity.this, DetalleActivity.class);
+                intent.putExtra("id_pedido", prefUtil.getStringValue("id_pedido"));
+                intent.putExtra("total", String.format("%.2f", total));
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void cargarCarrito() {
@@ -69,6 +86,7 @@ public class CarritoActivity extends AppCompatActivity {
                         if (r > 0) {
                             try {
                                 JSONArray jsonArray = new JSONArray(result);
+                                total = 0.0;
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     carrito.add(new Carrito(jsonArray.getJSONObject(i).getString("id_detalle_pedido"),
                                             jsonArray.getJSONObject(i).getString("id_producto"),
@@ -76,7 +94,11 @@ public class CarritoActivity extends AppCompatActivity {
                                             jsonArray.getJSONObject(i).getDouble("precio"),
                                             jsonArray.getJSONObject(i).getString("proveedor"),
                                             jsonArray.getJSONObject(i).getString("imagen")));
+                                    prefUtil.saveGenericValue("id_pedido",
+                                            jsonArray.getJSONObject(i).getString("id_pedido"));
+                                    total += jsonArray.getJSONObject(i).getDouble("precio");
                                 }
+                                btnRealizarPedido.setText("Realizar pedido (S/ " + String.format("%.2f", total) + ")");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CarritoActivity"
-    android:padding="10dp" >
+    android:padding="10dp"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/tvMensaje"
@@ -18,6 +19,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCarrito"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnRealizarPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Realizar pedido"
+        android:textAllCaps="false"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>
