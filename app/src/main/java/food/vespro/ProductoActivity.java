@@ -26,7 +26,7 @@ import food.vespro.publico.Funciones;
  */
 
 public class ProductoActivity extends AppCompatActivity {
-    public static String id_categoria;
+    public static String idTienda;
     private RecyclerView rvProducto;
     private ArrayList<Producto> productos;
     private ProductoAdapter productoAdapter;
@@ -40,7 +40,7 @@ public class ProductoActivity extends AppCompatActivity {
         tvMensaje = (TextView) findViewById(R.id.tvMensaje);
         rvProducto.setHasFixedSize(true);
         rvProducto.setLayoutManager(new LinearLayoutManager(this));
-        id_categoria = getIntent().getStringExtra("id_categoria");
+        idTienda = getIntent().getStringExtra("id_tienda");
         cargarProductos();
         tvMensaje.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,8 +70,8 @@ public class ProductoActivity extends AppCompatActivity {
         Thread tr = new Thread() {
             @Override
             public void run() {
-                final String result = Funciones.primero("https://vespro.io/food/wsApp/obtener_productos.php?id_categoria="
-                        + id_categoria);
+                final String result = Funciones.primero("https://vespro.io/food/wsApp/obtener_productos.php?id_tienda="
+                        + idTienda);
                 Log.i("cargarProductos", result);
                 runOnUiThread(new Runnable() {
                     @Override

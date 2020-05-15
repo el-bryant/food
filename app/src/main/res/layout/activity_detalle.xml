@@ -43,16 +43,24 @@
         android:layout_height="wrap_content"
         android:text="Pago con tarjeta" />
 
-    <LinearLayout
+    <RadioButton
+        android:id="@+id/rbtTienda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="Recoger en tienda" />
+
+    <LinearLayout
+        android:id="@+id/llayTarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <AutoCompleteTextView
+            <EditText
                 android:id="@+id/actvNumeroTarjeta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <AutoCompleteTextView
+            <EditText
                 android:id="@+id/actvNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" >
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/actvMes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" >
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/actvAnio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" >
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/actvCvv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

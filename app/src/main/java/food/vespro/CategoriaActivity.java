@@ -3,27 +3,16 @@ package food.vespro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import org.json.JSONArray;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-
 import food.vespro.adapter.CategoriaAdapter;
 import food.vespro.entity.Categoria;
+import food.vespro.publico.Funciones;
 
 public class CategoriaActivity extends AppCompatActivity {
     private ArrayList<Categoria> categorias;
@@ -54,12 +43,12 @@ public class CategoriaActivity extends AppCompatActivity {
         Thread tr = new Thread() {
             @Override
             public void run() {
-                final String result = primero("https://vespro.io/food/wsApp/obtener_categorias.php");
+                final String result = Funciones.primero("https://vespro.io/food/wsApp/obtener_categorias.php");
                 Log.i("cargarDatos", result);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        int r = segundo(result);
+                        int r = Funciones.segundo(result);
                         if (r > 0) {
                             try {
                                 JSONArray jsonArray = new JSONArray(result);
@@ -79,36 +68,5 @@ public class CategoriaActivity extends AppCompatActivity {
             }
         };
         tr.start();
-    }
-
-    public String primero(String direccion) {
-        URL url = null;
-        String linea = "";
-        int respuesta = 0;
-        StringBuilder result = null;
-        try {
-            url = new URL(direccion);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            respuesta = connection.getResponseCode();
-            result = new StringBuilder();
-            if (respuesta == HttpURLConnection.HTTP_OK) {
-                InputStream in = new BufferedInputStream(connection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                while ((linea = reader.readLine()) != null) {
-                    result.append(linea);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result.toString();
-    }
-
-    public int segundo(String response) {
-        int res = 0;
-        if (response != null) {
-            res = 1;
-        }
-        return res;
     }
 }

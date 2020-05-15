@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import food.vespro.ProductoActivity;
 import food.vespro.R;
+import food.vespro.TiendaActivity;
 import food.vespro.entity.Categoria;
 import food.vespro.publico.AppController;
 
@@ -50,7 +51,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
         holder.cvCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.cvCategoria.getContext(), ProductoActivity.class);
+                Intent intent = new Intent(holder.cvCategoria.getContext(), TiendaActivity.class);
                 intent.putExtra("id_categoria", holder.tvIdCategoria.getText().toString());
                 holder.cvCategoria.getContext().startActivity(intent);
             }
