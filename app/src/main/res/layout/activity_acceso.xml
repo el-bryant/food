@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,40 +7,112 @@
     android:layout_height="match_parent"
     tools:context=".AccesoActivity"
     android:orientation="vertical"
-    android:gravity="center" >
+    android:gravity="center"
+    android:background="@drawable/fondo" >
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher" />
-
-    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:src="@drawable/fondo_negro"
+        android:scaleType="fitXY" />
 
-        <AutoCompleteTextView
-            android:id="@+id/actvDni"
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="27dp"
+        android:src="@drawable/acceso1"
+        android:layout_gravity="top|start" />
+
+    <ImageView
+        android:layout_width="297dp"
+        android:layout_height="170dp"
+        android:src="@drawable/acceso2"
+        android:layout_gravity="top|end" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="145dp"
+        android:src="@drawable/acceso3"
+        android:layout_gravity="bottom|start" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="DNI:"
-            android:textAlignment="center"
-            android:inputType="number" />
+            android:orientation="vertical"
+            android:gravity="center" >
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/isotipo"
+                android:layout_marginBottom="30dp" />
 
-    <Button
-        android:id="@+id/btnAcceder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Acceder"
-        android:textAllCaps="false" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="25dp"
+                android:background="@color/blanco"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" >
 
-    <TextView
-        android:id="@+id/tvRegistro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Registrarme"
-        android:layout_margin="15dp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:textColorHint="@color/naranja">
 
-</LinearLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/actvDni"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="DNI:"
+                        android:textAlignment="center"
+                        android:inputType="number"
+                        android:textColor="@color/negro"
+                        android:textColorHint="@color/naranja"
+                        android:fontFamily="@font/comfortaa_bold"
+                        android:textSize="20sp"
+                        android:imeOptions="actionDone"
+                        android:nextFocusDown="@id/btnAcceder"
+                        android:maxLength="8"
+                        style="@style/Autocomplete" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnAcceder"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Acceder"
+                android:textAllCaps="false"
+                android:background="@drawable/boton_naranja"
+                android:textColor="@color/blanco"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Registrarme"
+                android:layout_margin="15dp"
+                android:textColor="@color/naranja"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

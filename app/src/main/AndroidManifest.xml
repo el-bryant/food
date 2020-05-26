@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="food.vespro">
+    package="food.codi">
 
     <application
         android:name=".publico.AppController"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TiendaActivity"></activity>
+        <activity android:name=".ValoracionActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -21,21 +21,47 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
+            android:name=".AccesoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CarritoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CategoriaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DescripcionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetalleActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".DireccionActivity"
             android:label="@string/title_activity_direccion" />
-        <activity android:name=".DetalleActivity" />
-        <activity android:name=".CarritoActivity" />
-        <activity android:name=".AccesoActivity">
+        <activity android:name=".PaymentDetails" />
+        <activity
+            android:name=".PedidoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProductoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegistroActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Splash"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".ProductoActivity" />
-        <activity android:name=".PedidoActivity" />
-        <activity android:name=".CategoriaActivity" />
+        <activity
+            android:name=".TiendaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
@@ -44,13 +70,17 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

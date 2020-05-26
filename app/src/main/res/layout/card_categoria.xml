@@ -4,27 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="8dp"
     android:id="@+id/cvCategoria"
-    app:cardCornerRadius="8dp" >
+    app:cardCornerRadius="20dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_margin="5dp" >
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:weightSum="12" >
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/nivIconoCategoria"
-            android:layout_width="25dp"
-            android:layout_height="25dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="5"
+            app:cardCornerRadius="15dp" >
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/nivIconoCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tvNombreCategoria"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nombre de categoría" />
+            android:text="Nombre de categoría"
+            android:textColor="@color/azul"
+            android:fontFamily="@font/arciform"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:layout_weight="7" />
 
         <TextView
             android:id="@+id/tvIdCategoria"

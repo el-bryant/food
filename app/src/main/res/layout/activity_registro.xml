@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,91 +7,194 @@
     android:layout_height="match_parent"
     tools:context=".RegistroActivity"
     android:orientation="vertical"
-    android:gravity="center" >
+    android:gravity="center"
+    android:fitsSystemWindows="true" >
 
     <ImageView
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fondo_negro"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:src="@drawable/registro1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
+    <ImageView
+        android:layout_width="215dp"
+        android:layout_height="240dp"
+        android:src="@drawable/registro2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:layout_width="200dp"
         android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/registro3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <AutoCompleteTextView
-            android:id="@+id/actvDni"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="DNI:"
-            android:textAlignment="center"
-            android:inputType="number"
-            android:maxLength="8" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <AutoCompleteTextView
-            android:id="@+id/actvApellidos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Apellidos:"
-            android:textAlignment="center"
-            android:enabled="false"
-            android:inputType="textCapSentences" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <AutoCompleteTextView
-            android:id="@+id/actvNombres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombres:"
-            android:textAlignment="center"
-            android:enabled="false"
-            android:inputType="textCapWords" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <AutoCompleteTextView
-            android:id="@+id/actvTelefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Celular:"
-            android:textAlignment="center"
-            android:inputType="phone" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <AutoCompleteTextView
-            android:id="@+id/actvCorreo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo electrónico:"
-            android:textAlignment="center"
-            android:inputType="textEmailAddress" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnRegistro"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrarme"
-        android:textAllCaps="false" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:src="@drawable/isotipo"
+                android:layout_marginBottom="30dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/blanco"
+                app:cardCornerRadius="25dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="25dp" >
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/naranja" >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actvDni"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="DNI:"
+                            android:textAlignment="center"
+                            android:inputType="number"
+                            android:maxLength="8"
+                            android:textColor="@color/negro"
+                            android:textColorHint="@color/naranja"
+                            android:fontFamily="@font/comfortaa_bold"
+                            android:imeOptions="actionNext"
+                            style="@style/Autocomplete" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/naranja" >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actvNombres"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nombres:"
+                            android:textAlignment="center"
+                            android:enabled="false"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/negro"
+                            android:textColorHint="@color/naranja"
+                            android:fontFamily="@font/comfortaa_bold"
+                            android:imeOptions="actionNext"
+                            style="@style/Autocomplete" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/naranja" >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actvApellidos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Apellidos:"
+                            android:textAlignment="center"
+                            android:enabled="false"
+                            android:inputType="textCapSentences"
+                            android:textColor="@color/negro"
+                            android:textColorHint="@color/naranja"
+                            android:fontFamily="@font/comfortaa_bold"
+                            android:imeOptions="actionNext"
+                            style="@style/Autocomplete" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/naranja" >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actvTelefono"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Celular:"
+                            android:textAlignment="center"
+                            android:inputType="phone"
+                            android:textColor="@color/negro"
+                            android:textColorHint="@color/naranja"
+                            android:fontFamily="@font/comfortaa_bold"
+                            android:imeOptions="actionNext"
+                            style="@style/Autocomplete" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/naranja" >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/actvCorreo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Correo electrónico:"
+                            android:textAlignment="center"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/negro"
+                            android:textColorHint="@color/naranja"
+                            android:fontFamily="@font/comfortaa_bold"
+                            android:imeOptions="actionDone"
+                            style="@style/Autocomplete" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Registrarme"
+                android:textAllCaps="false"
+                android:background="@drawable/boton_naranja"
+                android:textColor="@color/blanco"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="20sp"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginTop="30dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

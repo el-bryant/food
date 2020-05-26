@@ -20,31 +20,66 @@
         map:layout_constraintTop_toTopOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="10dp"
-        map:cardCornerRadius="10dp" >
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        map:cardCornerRadius="20dp" >
 
-        <TextView
-            android:id="@+id/tvDireccion"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:singleLine="true"
-            android:layout_margin="10dp"
-            android:textSize="15sp"
-            android:text="Cargando..."/>
+            android:orientation="vertical"
+            android:layout_margin="15dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/marcador" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dirección de destino:"
+                    android:textColor="@color/naranja"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/comfortaa_bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:singleLine="true"
+                android:textSize="15sp"
+                android:text="Cargando..."/>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnAceptar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:text="Aceptar"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:background="@drawable/boton_naranja"
+        android:textColor="@color/blanco"
+        android:fontFamily="@font/poppins_semibold"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
-        android:text="Aceptar"
-        android:textAllCaps="false"
-        android:layout_margin="10dp"
-        android:textSize="15sp" />
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,33 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CarritoActivity"
-    android:padding="10dp"
-    android:orientation="vertical" >
+    tools:context=".CarritoActivity" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fondo_negro"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:layout_width="215dp"
+        android:layout_height="240dp"
+        android:src="@drawable/registro2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivIsotipo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/isotipo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:id="@+id/tvMensaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:text="0" />
+        android:text="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCarrito"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/ivIsotipo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="120dp" />
 
     <Button
         android:id="@+id/btnRealizarPedido"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Realizar pedido"
         android:textAllCaps="false"
-        android:layout_marginTop="10dp" />
+        android:background="@drawable/boton_naranja"
+        android:textColor="@color/blanco"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

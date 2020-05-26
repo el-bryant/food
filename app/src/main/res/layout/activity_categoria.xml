@@ -1,36 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoriaActivity"
-    android:padding="10dp"
-    android:gravity="center" >
+    android:gravity="center"
+    tools:context=".CategoriaActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_negro" />
+    
+    <ImageView
+        android:layout_width="165dp"
+        android:layout_height="150dp"
+        android:src="@drawable/categoria1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:src="@drawable/categoria2"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/isotipo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvNombreCliente"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selecciona una categoría:"
-        android:layout_margin="10dp"
-        android:gravity="top|center"
-        android:textSize="20sp" />
+        android:text="Hola,"
+        android:textColor="@color/blanco"
+        android:fontFamily="@font/arciform"
+        android:textSize="35sp"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/arciform"
+        android:text="Selecciona una categoría"
+        android:textColor="@color/naranja"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="120dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/ic_carrito"
-        android:tint="#ffffff"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:tint="@color/blanco"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="50dp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
