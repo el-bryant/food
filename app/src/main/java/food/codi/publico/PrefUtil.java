@@ -3,9 +3,15 @@ package food.codi.publico;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * By: El Bryant
+ */
+
 public class PrefUtil {
-    private static final String NAME_REFERENCE = "version_code";
+    private static final String NAME_REFERENCE = "preffood";
     private Context context;
+    public static final String LOGIN_STATUS = "login_status";
+
 
     public PrefUtil(Context context) {
         this.context = context;
@@ -23,6 +29,7 @@ public class PrefUtil {
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();
+        editor.commit();
     }
 
     public String getStringValue(String campo) {

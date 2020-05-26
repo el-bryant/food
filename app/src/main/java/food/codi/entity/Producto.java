@@ -1,5 +1,9 @@
 package food.codi.entity;
 
+/**
+ * By: El Bryant
+ */
+
 public class Producto {
     String id_producto;
     String nombre;

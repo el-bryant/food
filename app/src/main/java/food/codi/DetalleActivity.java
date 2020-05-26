@@ -1,50 +1,47 @@
 package food.codi;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.material.navigation.NavigationView;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
-
 import org.json.JSONException;
-
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import food.codi.config.Config;
 import food.codi.publico.Funciones;
 import food.codi.publico.PrefUtil;
 
-public class DetalleActivity extends AppCompatActivity {
+/**
+ * By: El Bryant
+ */
+
+public class DetalleActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static Button btnDireccionEntrega, btnPlataformaPagos;
 //    public static EditText actvNumeroTarjeta, actvNombre, actvMes, actvAnio, actvCvv;
     public static TextView tvDireccionEntrega;
     RadioButton rbtEntrega, rbtTarjeta, rbtTienda;
     PrefUtil prefUtil;
-    LinearLayout llayTarjeta;
+//    LinearLayout llayTarjeta;
     Date fecha;
     public static Double latitud = 0.0, longitud = 0.0;
     private static final int PAYPAL_REQUEST_CODE = 7777;
@@ -52,6 +49,7 @@ public class DetalleActivity extends AppCompatActivity {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
     String amount = "";
+    ImageView ivMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +73,16 @@ public class DetalleActivity extends AppCompatActivity {
 //        actvCvv = (EditText) findViewById(R.id.actvCvv);
         btnPlataformaPagos = (Button) findViewById(R.id.btnPlataformaPagos);
 //        llayTarjeta = (LinearLayout) findViewById(R.id.llayTarjeta);
+        NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
+        nav.setNavigationItemSelectedListener(this);
+        ivMenu = (ImageView) findViewById(R.id.ivMenu);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ivMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(GravityCompat.START);
+            }
+        });
         prefUtil = new PrefUtil(this);
         btnPlataformaPagos.setText("Realizar pago (S/ " + getIntent().getStringExtra("total") + ")");
         btnDireccionEntrega.setOnClickListener(new View.OnClickListener() {
@@ -368,5 +376,62 @@ public class DetalleActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
         } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        Intent intent;
+        switch (id) {
+            case R.id.navCategorias:
+                intent = new Intent(DetalleActivity.this, CategoriaActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navCerrar:
+                prefUtil.clearAll();
+                intent = new Intent(DetalleActivity.this, AccesoActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navNotificaciones:
+                intent = new Intent(DetalleActivity.this, NotificacionesActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPedidos:
+                intent = new Intent(DetalleActivity.this, PedidosActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPerfil:
+                intent = new Intent(DetalleActivity.this, PerfilActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPreguntas:
+                intent = new Intent(DetalleActivity.this, PreguntasActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPromociones:
+                intent = new Intent(DetalleActivity.this, PromocionesActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

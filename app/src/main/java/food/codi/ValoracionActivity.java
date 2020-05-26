@@ -1,8 +1,11 @@
 package food.codi;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+/**
+ * By: El Bryant
+ */
 
 public class ValoracionActivity extends AppCompatActivity {
 

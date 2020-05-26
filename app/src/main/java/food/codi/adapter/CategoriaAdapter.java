@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import java.util.ArrayList;
-import food.codi.ProductoActivity;
 import food.codi.R;
 import food.codi.TiendaActivity;
 import food.codi.entity.Categoria;
 import food.codi.publico.AppController;
+
+/**
+ * By: El Bryant
+ */
 
 public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.ViewHolder> {
     private Context mContext;

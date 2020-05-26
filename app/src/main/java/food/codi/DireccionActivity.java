@@ -29,6 +29,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * By: El Bryant
+ */
+
 public class DireccionActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener,
         GoogleMap.OnCameraMoveListener {
     public static Double latitud = 0.0, longitud = 0.0;

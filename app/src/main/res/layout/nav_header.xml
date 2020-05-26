@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fondo_negro"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvNombreCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hola, Jossep"
+        android:textColor="@color/blanco"
+        android:textSize="30sp"
+        android:fontFamily="@font/arciform"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

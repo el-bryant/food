@@ -1,8 +1,9 @@
 package food.codi;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,10 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import food.codi.publico.Funciones;
 import food.codi.publico.PrefUtil;
+
+/**
+ * By: El Bryant
+ */
 
 public class AccesoActivity extends AppCompatActivity {
     TextView tvRegistro;
@@ -29,12 +34,6 @@ public class AccesoActivity extends AppCompatActivity {
         btnAcceder = (Button) findViewById(R.id.btnAcceder);
         actvDni = (AutoCompleteTextView) findViewById(R.id.actvDni);
         prefUtil = new PrefUtil(this);
-        if (prefUtil.getStringValue("dni_cliente").equals("")) {
-            Log.i("dni_cliente", prefUtil.getStringValue("dni_cliente"));
-            Intent intent = new Intent(AccesoActivity.this, CategoriaActivity.class);
-//            startActivity(intent);
-//            finish();
-        }
         tvRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +72,7 @@ public class AccesoActivity extends AppCompatActivity {
                                 if (jsonArray.length() > 0) {
                                     nombreUsuario = jsonArray.getJSONObject(0).getString("nombres");
                                     prefUtil.saveGenericValue("dni_cliente", dni_cliente);
+                                    prefUtil.saveGenericValue(PrefUtil.LOGIN_STATUS, "1");
                                     Intent intent = new Intent(AccesoActivity.this, CategoriaActivity.class);
                                     intent.putExtra("nombre", nombreUsuario);
                                     startActivity(intent);
@@ -88,5 +88,9 @@ public class AccesoActivity extends AppCompatActivity {
             }
         };
         tr.start();
+        SharedPreferences sharedPreferences = getSharedPreferences("datosUser", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("nomre", nombreUsuario);
+        editor.apply();
     }
 }

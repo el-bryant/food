@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".PromocionesActivity"></activity>
+        <activity android:name=".PreguntasActivity" />
+        <activity android:name=".PerfilActivity" />
+        <activity android:name=".NotificacionesActivity" />
         <activity android:name=".ValoracionActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -40,7 +44,7 @@
             android:label="@string/title_activity_direccion" />
         <activity android:name=".PaymentDetails" />
         <activity
-            android:name=".PedidoActivity"
+            android:name=".PedidosActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProductoActivity"
@@ -51,8 +55,7 @@
         <activity
             android:name=".Splash"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,13 +77,13 @@
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

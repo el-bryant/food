@@ -7,21 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import java.util.ArrayList;
-
 import food.codi.CarritoActivity;
 import food.codi.R;
 import food.codi.entity.Carrito;
-import food.codi.entity.Producto;
 import food.codi.publico.AppController;
 import food.codi.publico.Funciones;
+
+/**
+ * By: El Bryant
+ */
 
 public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.ViewHolder> {
     private Context mContext;

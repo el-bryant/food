@@ -22,6 +22,10 @@ import food.codi.publico.AppController;
 import food.codi.publico.Funciones;
 import food.codi.publico.PrefUtil;
 
+/**
+ * By: El Bryant
+ */
+
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Producto> mProductos;

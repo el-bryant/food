@@ -1,15 +1,21 @@
 package food.codi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import food.codi.publico.AppController;
 import food.codi.publico.Funciones;
@@ -19,7 +25,7 @@ import food.codi.publico.PrefUtil;
  * By: El Bryant
  */
 
-public class DescripcionActivity extends AppCompatActivity {
+public class DescripcionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static String id_producto = "", nombre_producto = "", precio_producto = "", nombre_proveedor = "", imagen_producto = "",
             id_pedido;
     public TextView tvIdProducto, tvNombreProducto, tvDescripcionProducto, tvNombreProveedor;
@@ -27,7 +33,7 @@ public class DescripcionActivity extends AppCompatActivity {
     public Button btnEnviarCarrito;
     private ImageLoader imgLoader = AppController.getInstance().getImageLoader();
     PrefUtil prefUtil;
-    public static int contador;
+    ImageView ivMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,16 @@ public class DescripcionActivity extends AppCompatActivity {
         tvNombreProveedor = (TextView) findViewById(R.id.tvNombreTienda);
         btnEnviarCarrito = (Button) findViewById(R.id.btnEnviarCarrito);
         nivImagenProducto = (NetworkImageView) findViewById(R.id.nivImagenProducto);
+        NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
+        nav.setNavigationItemSelectedListener(this);
+        ivMenu = (ImageView) findViewById(R.id.ivMenu);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ivMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(GravityCompat.START);
+            }
+        });
         prefUtil = new PrefUtil(this);
         id_producto = getIntent().getStringExtra("id_producto");
         nombre_producto = getIntent().getStringExtra("nombre_producto");
@@ -166,5 +182,62 @@ public class DescripcionActivity extends AppCompatActivity {
             }
         };
         tr.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        Intent intent;
+        switch (id) {
+            case R.id.navCategorias:
+                intent = new Intent(DescripcionActivity.this, CategoriaActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navCerrar:
+                prefUtil.clearAll();
+                intent = new Intent(DescripcionActivity.this, AccesoActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navNotificaciones:
+                intent = new Intent(DescripcionActivity.this, NotificacionesActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPedidos:
+                intent = new Intent(DescripcionActivity.this, PedidosActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPerfil:
+                intent = new Intent(DescripcionActivity.this, PerfilActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPreguntas:
+                intent = new Intent(DescripcionActivity.this, PreguntasActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.navPromociones:
+                intent = new Intent(DescripcionActivity.this, PromocionesActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

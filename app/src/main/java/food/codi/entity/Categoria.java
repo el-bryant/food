@@ -1,5 +1,9 @@
 package food.codi.entity;
 
+/**
+ * By: El Bryant
+ */
+
 public class Categoria {
     private long id_categoria;
     private String nombre;

@@ -9,13 +9,13 @@
     android:gravity="center"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".CategoriaActivity" >
+    tools:context=".NotificacionesActivity" >
 
     <include
-        layout="@layout/content_categoria"
+        layout="@layout/content_notificaciones"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"

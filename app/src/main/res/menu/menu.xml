@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navPedidos"
+        android:title="Mis pedidos" />
+
+    <item
+        android:id="@+id/navPerfil"
+        android:title="Mi perfil" />
+
+    <item
+        android:id="@+id/navCategorias"
+        android:title="Categorias" />
+
+    <item
+        android:id="@+id/navPromociones"
+        android:title="Códigos promocionales" />
+
+    <item
+        android:id="@+id/navPreguntas"
+        android:title="Preguntas" />
+
+    <item
+        android:id="@+id/navNotificaciones"
+        android:title="Notificaciones" />
+
+    <item
+        android:id="@+id/navCerrar"
+        android:title="Cerrar sesión" />
 
 </menu>

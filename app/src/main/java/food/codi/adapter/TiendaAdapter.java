@@ -17,6 +17,10 @@ import food.codi.R;
 import food.codi.entity.Tienda;
 import food.codi.publico.AppController;
 
+/**
+ * By: El Bryant
+ */
+
 public class TiendaAdapter extends RecyclerView.Adapter<TiendaAdapter.ViewHolder>{
     private Context mContext;
     private ArrayList<Tienda> mTiendas;

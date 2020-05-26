@@ -7,6 +7,10 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * By: El Bryant
+ */
+
 public class PaymentDetails extends AppCompatActivity {
     TextView txtId, txtAmount, txtStatus;
 

@@ -15,6 +15,10 @@ import org.json.JSONObject;
 import food.codi.publico.Funciones;
 import food.codi.publico.PrefUtil;
 
+/**
+ * By: El Bryant
+ */
+
 public class RegistroActivity extends AppCompatActivity {
     AutoCompleteTextView actvDni, actvApellidos, actvNombres, actvTelefono, actvCorreo;
     Button btnRegistro;

@@ -1,5 +1,9 @@
 package food.codi.entity;
 
+/**
+ * By: El Bryant
+ */
+
 public class Carrito {
     private String id_detalle_pedido;
     private String id_producto;

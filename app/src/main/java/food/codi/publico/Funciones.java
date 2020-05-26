@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * By: El Bryant
+ */
+
 public class Funciones {
 
     public static String primero(String direccion) {
