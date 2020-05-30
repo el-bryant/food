@@ -22,6 +22,59 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu"
+        android:background="@drawable/fondo_negro"
+        android:fitsSystemWindows="true"
+        android:theme="@style/navigationTheme"
+        app:itemTextColor="@color/blanco"
+        app:itemHorizontalPadding="10dp"
+        app:itemIconPadding="15dp"
+        app:itemIconTint="@color/naranja" >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/menu1"
+            android:layout_gravity="top|start" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom|center" >
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/naranja" />
+
+            <LinearLayout
+                android:id="@+id/ivCerrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_cerrar"
+                    android:tint="@color/blanco" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cerrar sesión"
+                    android:textColor="@color/blanco"
+                    android:fontFamily="@font/comfortaa_bold"
+                    android:layout_marginStart="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,11 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -20,6 +22,20 @@
     <style name="Autocomplete">
         <item name="colorControlNormal">@color/naranja</item>
         <item name="colorControlActivated">@color/naranja</item>
+    </style>
+
+    <style name="myRatingBar" parent="Widget.AppCompat.RatingBar.Indicator">
+        <item name="android:minHeight">32dp</item>
+        <item name="android:maxHeight">32dp</item>
+    </style>
+
+    <style name="navigationTheme" parent="AppTheme" >
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginTop">7.5dp</item>
+        <item name="android:layout_marginBottom">7.5dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
     </style>
 
 </resources>

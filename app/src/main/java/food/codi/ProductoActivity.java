@@ -13,7 +13,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,23 +33,28 @@ import food.codi.publico.PrefUtil;
 
 public class ProductoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static String idTienda;
+    private String nombre_nav = "";
     private RecyclerView rvProducto;
     private ArrayList<Producto> productos;
     private ProductoAdapter productoAdapter;
-    public static TextView tvMensaje;
+    public static TextView tvMensaje, tvNombreNav;
     PrefUtil prefUtil;
     ImageView ivMenu;
+    LinearLayout ivCerrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_producto);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         rvProducto = (RecyclerView) findViewById(R.id.rvProducto);
         tvMensaje = (TextView) findViewById(R.id.tvMensaje);
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
         nav.setNavigationItemSelectedListener(this);
+        tvNombreNav = (TextView) nav.getHeaderView(0).findViewById(R.id.tvNombreNav);
         ivMenu = (ImageView) findViewById(R.id.ivMenu);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ivCerrar = (LinearLayout) findViewById(R.id.ivCerrar);
         ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +84,26 @@ public class ProductoActivity extends AppCompatActivity implements NavigationVie
             public void onClick(View view) {
                 Intent intent = new Intent(ProductoActivity.this, CarritoActivity.class);
                 startActivity(intent);
+            }
+        });
+        char[] caracteres_nav = (prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).toLowerCase()).toCharArray();
+        caracteres_nav[0] = Character.toUpperCase(caracteres_nav[0]);
+        for (int i = 0; i < prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).length(); i ++) {
+            if (caracteres_nav[i] == ' ') {
+                caracteres_nav[i + 1] = Character.toUpperCase(caracteres_nav[i + 1]);
+            }
+            nombre_nav = nombre_nav + caracteres_nav[i];
+        }
+        tvNombreNav.setText("¡Hola, " + nombre_nav + "!");
+        ivCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefUtil.clearAll();
+                Intent intent = new Intent(ProductoActivity.this, AccesoActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -137,7 +164,7 @@ public class ProductoActivity extends AppCompatActivity implements NavigationVie
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.navCerrar:
+            case R.id.ivCerrar:
                 prefUtil.clearAll();
                 intent = new Intent(ProductoActivity.this, AccesoActivity.class);
                 startActivity(intent);

@@ -2,18 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fondo_negro"
-    android:padding="16dp">
+    android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/isotipo"
+        app:layout_constraintBottom_toTopOf="@id/tvNombreNav"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvNombreCliente"
+        android:id="@+id/tvNombreNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hola, Jossep"
-        android:textColor="@color/blanco"
-        android:textSize="30sp"
+        android:textColor="@color/naranja"
+        android:textSize="40sp"
         android:fontFamily="@font/arciform"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

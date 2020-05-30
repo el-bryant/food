@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
@@ -27,16 +30,20 @@ import food.codi.publico.PrefUtil;
 
 public class TiendaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static String id_categoria;
+    private String nombre_nav = "";
     private ArrayList<Tienda> tiendas;
     private RecyclerView rvTienda;
     private TiendaAdapter tiendaAdapter;
     PrefUtil prefUtil;
     ImageView ivMenu;
+    LinearLayout ivCerrar;
+    TextView tvNombreNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tienda);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         FloatingActionButton fab = findViewById(R.id.fab);
         rvTienda = (RecyclerView) findViewById(R.id.rvTienda);
         ivMenu = (ImageView) findViewById(R.id.ivMenu);
@@ -50,6 +57,8 @@ public class TiendaActivity extends AppCompatActivity implements NavigationView.
         });
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
         nav.setNavigationItemSelectedListener(this);
+        tvNombreNav = (TextView) nav.getHeaderView(0).findViewById(R.id.tvNombreNav);
+        ivCerrar = (LinearLayout) findViewById(R.id.ivCerrar);
         prefUtil = new PrefUtil(this);
         ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +69,27 @@ public class TiendaActivity extends AppCompatActivity implements NavigationView.
         rvTienda.setHasFixedSize(true);
         rvTienda.setLayoutManager(new LinearLayoutManager(this));
         id_categoria = getIntent().getStringExtra("id_categoria");
+        char[] caracteres_nav = (prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).toLowerCase()).toCharArray();
+        caracteres_nav[0] = Character.toUpperCase(caracteres_nav[0]);
+        for (int i = 0; i < prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).length(); i ++) {
+            if (caracteres_nav[i] == ' ') {
+                caracteres_nav[i + 1] = Character.toUpperCase(caracteres_nav[i + 1]);
+            }
+            nombre_nav = nombre_nav + caracteres_nav[i];
+        }
+        tvNombreNav.setText("¡Hola, " + nombre_nav + "!");
         cargarDatos();
+        ivCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefUtil.clearAll();
+                Intent intent = new Intent(TiendaActivity.this, AccesoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void cargarDatos() {
@@ -117,7 +146,7 @@ public class TiendaActivity extends AppCompatActivity implements NavigationView.
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.navCerrar:
+            case R.id.ivCerrar:
                 prefUtil.clearAll();
                 intent = new Intent(TiendaActivity.this, AccesoActivity.class);
                 startActivity(intent);

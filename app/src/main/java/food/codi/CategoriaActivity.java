@@ -6,12 +6,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.ActionBar;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -30,22 +35,26 @@ public class CategoriaActivity extends AppCompatActivity implements NavigationVi
     private ArrayList<Categoria> categorias;
     private RecyclerView rvCategoria;
     private CategoriaAdapter categoriaAdapter;
-    public static TextView tvNombrecliente;
-    public static String nombre_cliente = "";
+    public static TextView tvNombrecliente, tvNombreNav;
     PrefUtil prefUtil;
     ImageView ivMenu;
+    LinearLayout ivCerrar;
+    private String nombre_nav = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         rvCategoria = (RecyclerView) findViewById(R.id.rvCategoria);
         FloatingActionButton fab = findViewById(R.id.fab);
         tvNombrecliente = (TextView) findViewById(R.id.tvNombreCliente);
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
+        tvNombreNav = (TextView) nav.getHeaderView(0).findViewById(R.id.tvNombreNav);
         nav.setNavigationItemSelectedListener(this);
         ivMenu = (ImageView) findViewById(R.id.ivMenu);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ivCerrar = (LinearLayout) findViewById(R.id.ivCerrar);
         ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,10 +62,6 @@ public class CategoriaActivity extends AppCompatActivity implements NavigationVi
             }
         });
         prefUtil = new PrefUtil(this);
-        nombre_cliente = getIntent().getStringExtra("nombre");
-        tvNombrecliente.setText(nombre_cliente);
-//        tvNombrecliente.setText("Hola,\n" + nombre_cliente.substring(0, 1) + nombre_cliente.substring(1,
-//                nombre_cliente.indexOf(" ")).toLowerCase());
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +72,26 @@ public class CategoriaActivity extends AppCompatActivity implements NavigationVi
         rvCategoria.setHasFixedSize(true);
         rvCategoria.setLayoutManager(new LinearLayoutManager(this));
         cargarDatos();
+        ivCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefUtil.clearAll();
+                Intent intent = new Intent(CategoriaActivity.this, AccesoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        char[] caracteres_nav = (prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).toLowerCase()).toCharArray();
+        caracteres_nav[0] = Character.toUpperCase(caracteres_nav[0]);
+        for (int i = 0; i < prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).length(); i ++) {
+            if (caracteres_nav[i] == ' ') {
+                caracteres_nav[i + 1] = Character.toUpperCase(caracteres_nav[i + 1]);
+            }
+            nombre_nav = nombre_nav + caracteres_nav[i];
+        }
+        tvNombreNav.setText("¡Hola, " + nombre_nav + "!");
     }
 
     public void cargarDatos() {
@@ -122,7 +147,7 @@ public class CategoriaActivity extends AppCompatActivity implements NavigationVi
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.navCerrar:
+            case R.id.ivCerrar:
                 prefUtil.clearAll();
                 intent = new Intent(CategoriaActivity.this, AccesoActivity.class);
                 startActivity(intent);

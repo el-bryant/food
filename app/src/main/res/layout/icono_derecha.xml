@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="18dp"
+    android:layout_height="18dp"
+    android:gravity="center"
+    android:src="@drawable/ic_mas"
+    android:contentDescription="@null"
+    android:tint="@color/naranja"
+    android:padding="2dp" />

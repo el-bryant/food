@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.google.android.material.navigation.NavigationView;
 import food.codi.publico.PrefUtil;
 
@@ -19,15 +24,21 @@ import food.codi.publico.PrefUtil;
 public class PromocionesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     PrefUtil prefUtil;
     ImageView ivMenu;
+    LinearLayout ivCerrar;
+    private String nombre_nav = "";
+    TextView tvNombreNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promociones);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
         nav.setNavigationItemSelectedListener(this);
+        tvNombreNav = (TextView) nav.getHeaderView(0).findViewById(R.id.tvNombreNav);
         ivMenu = (ImageView) findViewById(R.id.ivMenu);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ivCerrar = (LinearLayout) findViewById(R.id.ivCerrar);
         ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,6 +46,26 @@ public class PromocionesActivity extends AppCompatActivity implements Navigation
             }
         });
         prefUtil = new PrefUtil(this);
+        char[] caracteres_nav = (prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).toLowerCase()).toCharArray();
+        caracteres_nav[0] = Character.toUpperCase(caracteres_nav[0]);
+        for (int i = 0; i < prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).length(); i ++) {
+            if (caracteres_nav[i] == ' ') {
+                caracteres_nav[i + 1] = Character.toUpperCase(caracteres_nav[i + 1]);
+            }
+            nombre_nav = nombre_nav + caracteres_nav[i];
+        }
+        tvNombreNav.setText("¡Hola, " + nombre_nav + "!");
+        ivCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefUtil.clearAll();
+                Intent intent = new Intent(PromocionesActivity.this, AccesoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -57,7 +88,7 @@ public class PromocionesActivity extends AppCompatActivity implements Navigation
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.navCerrar:
+            case R.id.ivCerrar:
                 prefUtil.clearAll();
                 intent = new Intent(PromocionesActivity.this, AccesoActivity.class);
                 startActivity(intent);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import food.codi.publico.PrefUtil;
 
@@ -20,6 +21,7 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         pbSplash = (ProgressBar) findViewById(R.id.pbSplash);
         prefUtil = new PrefUtil(this);
         handler = new Handler();
@@ -29,7 +31,7 @@ public class Splash extends AppCompatActivity {
                 if (prefUtil.getStringValue(PrefUtil.LOGIN_STATUS).equals("1")) {
                     Intent intent = new Intent(Splash.this, CategoriaActivity.class);
                     startActivity(intent);
-                    intent.putExtra("nombre", prefUtil.getStringValue("noombre"));
+                    intent.putExtra("nombre", prefUtil.getStringValue("nombre"));
                     finish();
                 } else {
                     Intent intent = new Intent(Splash.this, AccesoActivity.class);

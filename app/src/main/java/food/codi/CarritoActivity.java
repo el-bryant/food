@@ -13,7 +13,10 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
@@ -33,18 +36,23 @@ public class CarritoActivity extends AppCompatActivity implements NavigationView
     PrefUtil prefUtil;
     ArrayList<Carrito> carrito;
     public static CarritoAdapter carritoAdapter;
-    public static TextView tvMensaje;
+    public static TextView tvMensaje, tvNombreNav;
     public Button btnRealizarPedido;
     public static Double total = 0.0;
+    private String nombre_nav = "";
+    LinearLayout ivCerrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         rvCarrito = (RecyclerView) findViewById(R.id.rvCarrito);
         tvMensaje = (TextView) findViewById(R.id.tvMensaje);
         btnRealizarPedido = (Button) findViewById(R.id.btnRealizarPedido);
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
+        tvNombreNav = (TextView) nav.getHeaderView(0).findViewById(R.id.tvNombreNav);
+        ivCerrar = (LinearLayout) findViewById(R.id.ivCerrar);
         nav.setNavigationItemSelectedListener(this);
         prefUtil = new PrefUtil(this);
         rvCarrito.setHasFixedSize(true);
@@ -70,6 +78,26 @@ public class CarritoActivity extends AppCompatActivity implements NavigationView
                 Intent intent = new Intent(CarritoActivity.this, DetalleActivity.class);
                 intent.putExtra("id_pedido", prefUtil.getStringValue("id_pedido"));
                 intent.putExtra("total", String.format("%.2f", total));
+                startActivity(intent);
+                finish();
+            }
+        });
+        char[] caracteres_nav = (prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).toLowerCase()).toCharArray();
+        caracteres_nav[0] = Character.toUpperCase(caracteres_nav[0]);
+        for (int i = 0; i < prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).length(); i ++) {
+            if (caracteres_nav[i] == ' ') {
+                caracteres_nav[i + 1] = Character.toUpperCase(caracteres_nav[i + 1]);
+            }
+            nombre_nav = nombre_nav + caracteres_nav[i];
+        }
+        tvNombreNav.setText("¡Hola, " + nombre_nav + "!");
+        ivCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefUtil.clearAll();
+                Intent intent = new Intent(CarritoActivity.this, AccesoActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -138,7 +166,7 @@ public class CarritoActivity extends AppCompatActivity implements NavigationView
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.navCerrar:
+            case R.id.ivCerrar:
                 prefUtil.clearAll();
                 intent = new Intent(CarritoActivity.this, AccesoActivity.class);
                 startActivity(intent);

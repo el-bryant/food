@@ -34,7 +34,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_menu"
-        android:tint="@color/blanco"
+        android:tint="@color/naranja"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="30dp"
@@ -50,22 +50,22 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp" />
 
-    <TextView
-        android:id="@+id/tvNombreCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hola,"
-        android:textColor="@color/blanco"
-        android:fontFamily="@font/arciform"
-        android:textSize="35sp"
-        android:textAlignment="textEnd"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
-        android:visibility="gone" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvNombreCliente"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hola,"-->
+<!--        android:textColor="@color/blanco"-->
+<!--        android:fontFamily="@font/arciform"-->
+<!--        android:textSize="35sp"-->
+<!--        android:textAlignment="textEnd"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginBottom="50dp"-->
+<!--        android:visibility="gone" />-->
 
     <TextView
         android:id="@+id/tvTitulo"

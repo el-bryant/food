@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +40,7 @@ import food.codi.publico.PrefUtil;
 public class DetalleActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static Button btnDireccionEntrega, btnPlataformaPagos;
 //    public static EditText actvNumeroTarjeta, actvNombre, actvMes, actvAnio, actvCvv;
-    public static TextView tvDireccionEntrega;
+    public static TextView tvDireccionEntrega, tvNombreNav;
     RadioButton rbtEntrega, rbtTarjeta, rbtTienda;
     PrefUtil prefUtil;
 //    LinearLayout llayTarjeta;
@@ -50,11 +52,14 @@ public class DetalleActivity extends AppCompatActivity implements NavigationView
             .clientId(Config.PAYPAL_CLIENT_ID);
     String amount = "";
     ImageView ivMenu;
+    LinearLayout ivCerrar;
+    private String nombre_nav = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         //start paypal service
         Intent intent = new Intent(this, PayPalService.class);
@@ -75,8 +80,10 @@ public class DetalleActivity extends AppCompatActivity implements NavigationView
 //        llayTarjeta = (LinearLayout) findViewById(R.id.llayTarjeta);
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
         nav.setNavigationItemSelectedListener(this);
+        tvNombreNav = (TextView) nav.getHeaderView(0).findViewById(R.id.tvNombreNav);
         ivMenu = (ImageView) findViewById(R.id.ivMenu);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ivCerrar = (LinearLayout) findViewById(R.id.ivCerrar);
         ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +198,26 @@ public class DetalleActivity extends AppCompatActivity implements NavigationView
 //                });
 //            }
 //        });
+        char[] caracteres_nav = (prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).toLowerCase()).toCharArray();
+        caracteres_nav[0] = Character.toUpperCase(caracteres_nav[0]);
+        for (int i = 0; i < prefUtil.getStringValue("nombre").substring(0,
+                prefUtil.getStringValue("nombre").indexOf(" ")).length(); i ++) {
+            if (caracteres_nav[i] == ' ') {
+                caracteres_nav[i + 1] = Character.toUpperCase(caracteres_nav[i + 1]);
+            }
+            nombre_nav = nombre_nav + caracteres_nav[i];
+        }
+        tvNombreNav.setText("¡Hola, " + nombre_nav + "!");
+        ivCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefUtil.clearAll();
+                Intent intent = new Intent(DetalleActivity.this, AccesoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void pagar() {
@@ -398,7 +425,7 @@ public class DetalleActivity extends AppCompatActivity implements NavigationView
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.navCerrar:
+            case R.id.ivCerrar:
                 prefUtil.clearAll();
                 intent = new Intent(DetalleActivity.this, AccesoActivity.class);
                 startActivity(intent);

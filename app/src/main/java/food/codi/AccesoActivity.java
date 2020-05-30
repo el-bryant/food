@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class AccesoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceso);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         tvRegistro = (TextView) findViewById(R.id.tvRegistro);
         btnAcceder = (Button) findViewById(R.id.btnAcceder);
         actvDni = (AutoCompleteTextView) findViewById(R.id.actvDni);
@@ -72,6 +74,7 @@ public class AccesoActivity extends AppCompatActivity {
                                 if (jsonArray.length() > 0) {
                                     nombreUsuario = jsonArray.getJSONObject(0).getString("nombres");
                                     prefUtil.saveGenericValue("dni_cliente", dni_cliente);
+                                    prefUtil.saveGenericValue("nombre", nombreUsuario);
                                     prefUtil.saveGenericValue(PrefUtil.LOGIN_STATUS, "1");
                                     Intent intent = new Intent(AccesoActivity.this, CategoriaActivity.class);
                                     intent.putExtra("nombre", nombreUsuario);

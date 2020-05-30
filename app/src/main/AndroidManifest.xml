@@ -10,12 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".PromocionesActivity"></activity>
-        <activity android:name=".PreguntasActivity" />
-        <activity android:name=".PerfilActivity" />
-        <activity android:name=".NotificacionesActivity" />
-        <activity android:name=".ValoracionActivity" />
+        android:usesCleartextTraffic="true" >
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -25,33 +20,29 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name=".AccesoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".AccesoActivity" />
         <activity
-            android:name=".CarritoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".CarritoActivity" />
         <activity
-            android:name=".CategoriaActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".CategoriaActivity" />
         <activity
-            android:name=".DescripcionActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".DescripcionActivity" />
         <activity
-            android:name=".DetalleActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".DetalleActivity" />
         <activity
             android:name=".DireccionActivity"
             android:label="@string/title_activity_direccion" />
         <activity android:name=".PaymentDetails" />
+        <activity android:name=".NotificacionesActivity" />
         <activity
-            android:name=".PedidosActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".PedidosActivity" />
+        <activity android:name=".PerfilActivity" />
+        <activity android:name=".PreguntasActivity" />
         <activity
-            android:name=".ProductoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ProductoActivity"/>
+        <activity android:name=".PromocionesActivity" />
         <activity
-            android:name=".RegistroActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".RegistroActivity" />
         <activity
             android:name=".Splash"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -63,8 +54,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TiendaActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".TiendaActivity" />
+        <activity android:name=".ValoracionActivity" />
         <activity
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
@@ -77,13 +68,13 @@
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
     </application>
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
